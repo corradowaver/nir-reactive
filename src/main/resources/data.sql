@@ -1,0 +1,21 @@
+-- DROP TABLE IF EXISTS users;
+-- CREATE TABLE users (username VARCHAR(255) NOT NULL, password VARCHAR(255), PRIMARY KEY (username));
+--
+-- DROP FUNCTION IF EXISTS get_random_string();
+-- CREATE FUNCTION get_random_string() RETURNS TEXT LANGUAGE SQL
+-- AS $$
+--     SELECT string_agg (substr('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', ceil (random() * 62)::integer, 1), '') FROM GENERATE_SERIES(1, 20)
+-- $$;
+--
+-- DROP FUNCTION IF EXISTS insert_record();
+-- CREATE FUNCTION insert_record() RETURNS VOID LANGUAGE PLPGSQL
+-- AS $$
+--     DECLARE
+--         username TEXT := INITCAP(get_random_string());
+--         password TEXT := INITCAP(get_random_string());
+--     BEGIN
+--         INSERT INTO users (username, password) VALUES (username, password) ON CONFLICT DO NOTHING;
+--     END;
+-- $$;
+--
+-- SELECT insert_record() FROM GENERATE_SERIES(1, 1000000);
